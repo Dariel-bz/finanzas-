@@ -3,1033 +3,810 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#000000">
 <title>Finanzas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,200;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --surface2: #1e1e1e;
-    --border: #2a2a2a;
-    --text: #f0f0f0;
-    --muted: #666;
-    --accent: #c8f500;
-    --accent-dim: rgba(200,245,0,0.08);
-    --accent-border: rgba(200,245,0,0.2);
-    --red: #ff4d4d;
-    --red-dim: rgba(255,77,77,0.08);
-    --blue: #5b8af7;
-    --blue-dim: rgba(91,138,247,0.08);
-    --green: #4dff91;
-    --green-dim: rgba(77,255,145,0.08);
-    --mono: 'DM Mono', monospace;
-    --sans: 'DM Sans', sans-serif;
-  }
-
-- { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: var(–sans);
-min-height: 100vh;
-font-size: 14px;
+:root {
+  --bg:      #000;
+  --s1:      #0f0f0f;
+  --s2:      #161616;
+  --s3:      #1f1f1f;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text:    #ffffff;
+  --sub:     rgba(255,255,255,0.42);
+  --sub2:    rgba(255,255,255,0.22);
+  --green:   #7EE8A2;
+  --green-d: rgba(126,232,162,0.10);
+  --green-b: rgba(126,232,162,0.28);
+  --red:     #FF6B6B;
+  --red-d:   rgba(255,107,107,0.10);
+  --red-b:   rgba(255,107,107,0.28);
+  --blue:    #74B9FF;
+  --blue-d:  rgba(116,185,255,0.10);
+  --blue-b:  rgba(116,185,255,0.28);
+  --yellow:  #FFEAA7;
+  --r:       14px;
+  --rsm:     10px;
+  --font:    'Nunito', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{background:#000;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:var(--font);min-height:100vh;
+  font-size:15px;-webkit-font-smoothing:antialiased;
+  padding-bottom:calc(16px + env(safe-area-inset-bottom));
 }
 
 /* NAV */
-nav {
-position: fixed; top:0; left:0; right:0; z-index:100;
-background: rgba(13,13,13,0.92);
-backdrop-filter: blur(12px);
-border-bottom: 1px solid var(–border);
-display: flex; align-items: center;
-padding: 0 20px;
-height: 52px;
+nav{
+position:fixed;top:0;left:0;right:0;z-index:100;
+background:rgba(0,0,0,0.88);
+backdrop-filter:blur(24px) saturate(1.8);
+-webkit-backdrop-filter:blur(24px) saturate(1.8);
+padding-top:env(safe-area-inset-top);
+border-bottom:1px solid var(–border);
 }
-.nav-logo {
-font-family: var(–mono);
-font-size: 13px;
-color: var(–accent);
-letter-spacing: 0.08em;
-margin-right: auto;
+.nav-inner{display:flex;align-items:center;padding:0 18px;height:52px;}
+.nav-logo{font-size:19px;font-weight:800;letter-spacing:-0.5px;margin-right:auto;}
+.nav-logo em{font-style:normal;color:var(–green);}
+.nav-tabs{
+display:flex;background:var(–s2);
+border:1px solid var(–border);
+border-radius:100px;padding:3px;gap:2px;
 }
-.nav-tabs {
-display: flex; gap:2px;
+.tab-btn{
+background:none;border:none;color:var(–sub);
+font-family:var(–font);font-size:13px;font-weight:700;
+padding:6px 15px;border-radius:100px;
+cursor:pointer;transition:all 0.2s;
 }
-.tab-btn {
-background: none; border: none;
-color: var(–muted);
-font-family: var(–mono);
-font-size: 11px;
-letter-spacing: 0.06em;
-padding: 6px 12px;
-border-radius: 6px;
-cursor: pointer;
-transition: all 0.15s;
-text-transform: uppercase;
-}
-.tab-btn:hover { color: var(–text); background: var(–surface); }
-.tab-btn.active { color: var(–accent); background: var(–accent-dim); }
+.tab-btn:hover{color:var(–text);}
+.tab-btn.active{background:var(–s3);color:var(–text);box-shadow:0 1px 4px rgba(0,0,0,0.5);}
 
-/* MAIN */
-main { padding-top: 52px; }
-.page { display:none; padding: 24px 20px; max-width: 680px; margin: 0 auto; }
-.page.active { display:block; }
+/* LAYOUT */
+main{padding-top:calc(52px + env(safe-area-inset-top));}
+.page{display:none;padding:18px 15px 40px;max-width:580px;margin:0 auto;}
+.page.active{display:block;animation:fadeIn 0.22s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-/* SECTION HEADERS */
-.section-title {
-font-family: var(–mono);
-font-size: 10px;
-letter-spacing: 0.12em;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 12px;
-margin-top: 28px;
+/* LABELS */
+.lbl{
+font-size:11px;font-weight:800;letter-spacing:0.09em;
+text-transform:uppercase;color:var(–sub);
+margin:22px 0 9px;padding-left:2px;
 }
-.section-title:first-child { margin-top: 0; }
+.lbl:first-child{margin-top:0;}
 
-/* CARDS */
-.card {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 16px;
-margin-bottom: 8px;
+/* HERO */
+.hero{
+background:var(–s1);border:1px solid var(–border);
+border-radius:20px;padding:22px 20px 18px;
+margin-bottom:8px;position:relative;overflow:hidden;
 }
-.card-row {
-display: flex; align-items: center; justify-content: space-between;
+.hero::after{
+content:’’;position:absolute;top:-60px;right:-60px;
+width:160px;height:160px;
+background:radial-gradient(circle,rgba(126,232,162,0.05) 0%,transparent 70%);
+pointer-events:none;
 }
-.card-label {
-font-size: 13px;
-color: var(–muted);
+.hero-lbl{font-size:12px;font-weight:600;color:var(–sub);margin-bottom:5px;}
+.hero-amt{
+font-size:42px;font-weight:800;letter-spacing:-2px;
+line-height:1;color:var(–text);margin-bottom:12px;
 }
-.card-value {
-font-family: var(–mono);
-font-size: 22px;
-font-weight: 400;
-letter-spacing: -0.02em;
+.hero-amt.neg{color:var(–red);}
+.chips{display:flex;gap:6px;flex-wrap:wrap;}
+.chip{
+background:var(–s3);border-radius:100px;
+padding:4px 11px;font-size:11px;font-weight:700;
+display:inline-flex;align-items:center;gap:4px;
 }
-.card-value.positive { color: var(–accent); }
-.card-value.negative { color: var(–red); }
-.card-value.neutral { color: var(–text); }
+.chip.up{color:var(–green);}
+.chip.dn{color:var(–red);}
+.chip.neu{color:var(–sub);}
 
-/* BALANCE GRID */
-.balance-grid {
-display: grid;
-grid-template-columns: 1fr 1fr;
-gap: 8px;
-margin-bottom: 8px;
+/* GRID */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;}
+.mini{
+background:var(–s1);border:1px solid var(–border);
+border-radius:var(–r);padding:13px 14px;
 }
-.balance-mini {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 14px;
+.mini-lbl{
+font-size:11px;font-weight:700;color:var(–sub);
+margin-bottom:5px;display:flex;align-items:center;gap:5px;
 }
-.balance-mini-label {
-font-family: var(–mono);
-font-size: 9px;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–muted);
-margin-bottom: 6px;
-}
-.balance-mini-val {
-font-family: var(–mono);
-font-size: 16px;
-font-weight: 500;
-}
-.efectivo .balance-mini-val { color: var(–green); }
-.tarjeta .balance-mini-val { color: var(–blue); }
+.dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.mini-val{font-size:17px;font-weight:800;letter-spacing:-0.4px;}
+.c-green{color:var(–green);}
+.c-red{color:var(–red);}
+.c-blue{color:var(–blue);}
+.c-sub{color:var(–sub);}
 
-/* QUICK ACTIONS */
-.quick-grid {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 8px;
-margin-bottom: 8px;
+/* BUSES */
+.buses{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px;}
+.bus-btn{
+background:var(–s1);border:1.5px solid var(–border);
+border-radius:var(–r);padding:14px 8px;
+cursor:pointer;transition:all 0.17s ease;
+text-align:center;display:flex;flex-direction:column;
+align-items:center;gap:5px;
 }
-.quick-btn {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 14px 10px;
-cursor: pointer;
-transition: all 0.15s;
-text-align: center;
-display: flex; flex-direction: column; align-items: center; gap: 6px;
+.bus-btn:hover,.bus-btn:active{
+border-color:var(–green-b);background:var(–green-d);
+transform:scale(0.96);
 }
-.quick-btn:hover { border-color: var(–accent-border); background: var(–accent-dim); }
-.quick-btn:active { transform: scale(0.97); }
-.quick-icon { font-size: 18px; }
-.quick-name { font-family: var(–mono); font-size: 10px; color: var(–muted); letter-spacing: 0.04em; }
-.quick-price { font-family: var(–mono); font-size: 11px; color: var(–accent); }
+.bus-icon{font-size:20px;}
+.bus-name{font-size:11px;font-weight:800;color:var(–sub);letter-spacing:0.03em;}
+.bus-price{font-size:12px;font-weight:800;color:var(–green);}
 
 /* FORM */
-.form-group { margin-bottom: 12px; }
-.form-label {
-font-family: var(–mono);
-font-size: 10px;
-letter-spacing: 0.1em;
-text-transform: uppercase;
-color: var(–muted);
-display: block;
-margin-bottom: 6px;
+.card{
+background:var(–s1);border:1px solid var(–border);
+border-radius:var(–r);padding:16px;margin-bottom:8px;
 }
-.form-input, .form-select {
-width: 100%;
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 8px;
-color: var(–text);
-font-family: var(–sans);
-font-size: 14px;
-padding: 10px 12px;
-outline: none;
-transition: border-color 0.15s;
-appearance: none;
--webkit-appearance: none;
+.fg{margin-bottom:13px;}
+.fg:last-child{margin-bottom:0;}
+.fl{
+font-size:11px;font-weight:800;letter-spacing:0.07em;
+text-transform:uppercase;color:var(–sub);
+display:block;margin-bottom:7px;
 }
-.form-input:focus, .form-select:focus { border-color: var(–accent); }
-.form-input::placeholder { color: var(–muted); }
+.fi{
+width:100%;background:var(–s2);
+border:1.5px solid var(–border);border-radius:var(–rsm);
+color:var(–text);font-family:var(–font);
+font-size:15px;font-weight:600;
+padding:11px 13px;outline:none;
+transition:border-color 0.15s;appearance:none;
+}
+.fi:focus{border-color:rgba(126,232,162,0.4);}
+.fi::placeholder{color:var(–sub2);}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+/* TOGGLE */
+.tog{
+display:grid;grid-template-columns:1fr 1fr;gap:4px;
+background:var(–s2);border:1.5px solid var(–border);
+border-radius:var(–rsm);padding:4px;
+}
+.tog-opt{
+padding:10px 6px;text-align:center;border-radius:8px;
+cursor:pointer;font-family:var(–font);
+font-size:13px;font-weight:800;color:var(–sub);
+transition:all 0.17s ease;border:1.5px solid transparent;
+background:none;letter-spacing:0.01em;
+}
+.tog-opt:hover{color:var(–text);}
+.sel-ing{background:var(–green-d);border-color:var(–green-b);color:var(–green);}
+.sel-gas{background:var(–red-d);border-color:var(–red-b);color:var(–red);}
+.sel-ef{background:var(–green-d);border-color:var(–green-b);color:var(–green);}
+.sel-ta{background:var(–blue-d);border-color:var(–blue-b);color:var(–blue);}
 
-.type-toggle {
-display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-background: var(–surface); border: 1px solid var(–border);
-border-radius: 8px; padding: 4px;
+/* BTN */
+.btn{
+width:100%;padding:13px;border:none;border-radius:var(–rsm);
+font-family:var(–font);font-size:14px;font-weight:800;
+letter-spacing:0.02em;cursor:pointer;transition:all 0.17s;
 }
-.type-opt {
-padding: 8px; text-align: center;
-border-radius: 6px; cursor: pointer;
-font-family: var(–mono); font-size: 11px; letter-spacing: 0.06em;
-color: var(–muted); transition: all 0.15s;
-text-transform: uppercase;
-border: none; background: none;
-}
-.type-opt.active.ingreso { background: var(–green-dim); color: var(–green); }
-.type-opt.active.gasto { background: var(–red-dim); color: var(–red); }
+.btn-g{background:var(–green);color:#000;}
+.btn-g:hover{background:#91f0b2;}
+.btn-g:active{transform:scale(0.98);}
 
-.method-toggle {
-display: grid; grid-template-columns: 1fr 1fr; gap: 4px;
-background: var(–surface); border: 1px solid var(–border);
-border-radius: 8px; padding: 4px;
+/* TX */
+.tx{
+background:var(–s1);border:1px solid var(–border);
+border-radius:var(–r);padding:12px 13px;
+margin-bottom:6px;display:flex;align-items:center;
+gap:11px;transition:border-color 0.15s;
 }
-.method-opt {
-padding: 8px; text-align: center;
-border-radius: 6px; cursor: pointer;
-font-family: var(–mono); font-size: 11px; letter-spacing: 0.06em;
-color: var(–muted); transition: all 0.15s;
-text-transform: uppercase;
-border: none; background: none;
+.tx:hover{border-color:var(–border2);}
+.tx-ico{
+width:36px;height:36px;border-radius:10px;
+display:flex;align-items:center;justify-content:center;
+font-size:15px;flex-shrink:0;font-weight:700;
 }
-.method-opt.active.efectivo { background: var(–green-dim); color: var(–green); }
-.method-opt.active.tarjeta { background: var(–blue-dim); color: var(–blue); }
+.tx-ico.ingreso{background:var(–green-d);color:var(–green);}
+.tx-ico.gasto{background:var(–red-d);color:var(–red);}
+.tx-body{flex:1;min-width:0;}
+.tx-desc{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px;}
+.tx-meta{font-size:11px;color:var(–sub);display:flex;gap:5px;align-items:center;flex-wrap:wrap;}
+.badge{padding:1px 7px;border-radius:100px;font-size:10px;font-weight:800;}
+.b-ef{background:var(–green-d);color:var(–green);}
+.b-ta{background:var(–blue-d);color:var(–blue);}
+.b-u{background:rgba(255,234,167,0.1);color:var(–yellow);}
+.tx-amt{font-size:14px;font-weight:800;letter-spacing:-0.3px;flex-shrink:0;}
+.tx-amt.ingreso{color:var(–green);}
+.tx-amt.gasto{color:var(–red);}
+.tx-del{
+background:none;border:none;color:var(–sub2);
+cursor:pointer;font-size:17px;padding:3px;
+border-radius:6px;transition:color 0.15s;line-height:1;
+}
+.tx-del:hover{color:var(–red);}
 
-.btn-primary {
-width: 100%; padding: 12px;
-background: var(–accent); color: #000;
-border: none; border-radius: 8px;
-font-family: var(–mono); font-size: 12px;
-letter-spacing: 0.08em; text-transform: uppercase;
-cursor: pointer; font-weight: 500;
-transition: all 0.15s;
+/* UNI HERO */
+.uni-hero{
+background:var(–s1);border:1px solid var(–border);
+border-radius:20px;padding:20px;margin-bottom:8px;
 }
-.btn-primary:hover { background: #d4ff1a; }
-.btn-primary:active { transform: scale(0.98); }
+.uni-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
+.uni-budget-block .ul{font-size:12px;font-weight:600;color:var(–sub);margin-bottom:3px;}
+.uni-budget-block .uv{font-size:15px;font-weight:700;color:var(–sub);}
+.uni-remain-block{text-align:right;}
+.uni-remain-block .ul{font-size:12px;font-weight:600;color:var(–sub);margin-bottom:3px;}
+.uni-remain-val{font-size:38px;font-weight:800;letter-spacing:-1.5px;line-height:1;color:var(–green);}
+.uni-remain-val.warn{color:var(–yellow);}
+.uni-remain-val.danger{color:var(–red);}
+.prog{height:5px;background:var(–s3);border-radius:100px;overflow:hidden;margin-bottom:7px;}
+.prog-fill{height:100%;border-radius:100px;background:var(–green);transition:width 0.5s ease;}
+.prog-fill.warn{background:var(–yellow);}
+.prog-fill.danger{background:var(–red);}
+.prog-lbls{display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(–sub);}
 
-/* TRANSACTIONS LIST */
-.tx-item {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 12px 14px;
-margin-bottom: 6px;
-display: flex; align-items: center; gap: 12px;
-transition: border-color 0.15s;
+/* MONTH NAV */
+.mnav{display:flex;align-items:center;gap:10px;margin-bottom:13px;}
+.mnav-btn{
+background:var(–s2);border:1px solid var(–border);
+color:var(–text);border-radius:9px;
+width:32px;height:32px;cursor:pointer;
+font-size:17px;display:flex;align-items:center;justify-content:center;
+transition:all 0.15s;flex-shrink:0;
 }
-.tx-item:hover { border-color: #333; }
-.tx-dot {
-width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-}
-.tx-dot.ingreso { background: var(–green); }
-.tx-dot.gasto { background: var(–red); }
-.tx-info { flex: 1; min-width: 0; }
-.tx-desc {
-font-size: 13px; font-weight: 400;
-white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.tx-meta {
-font-family: var(–mono); font-size: 10px;
-color: var(–muted); margin-top: 2px;
-display: flex; gap: 8px; align-items: center;
-}
-.tx-method-badge {
-padding: 1px 6px; border-radius: 4px;
-font-size: 9px;
-}
-.tx-method-badge.efectivo { background: var(–green-dim); color: var(–green); }
-.tx-method-badge.tarjeta { background: var(–blue-dim); color: var(–blue); }
-.tx-amount {
-font-family: var(–mono); font-size: 14px; font-weight: 500;
-text-align: right; flex-shrink: 0;
-}
-.tx-amount.ingreso { color: var(–green); }
-.tx-amount.gasto { color: var(–red); }
-.tx-del {
-background: none; border: none; color: var(–muted);
-cursor: pointer; font-size: 14px; padding: 4px;
-border-radius: 4px; transition: color 0.15s;
-flex-shrink: 0;
-}
-.tx-del:hover { color: var(–red); }
+.mnav-btn:hover{border-color:var(–green-b);color:var(–green);}
+.mnav-lbl{flex:1;text-align:center;font-size:14px;font-weight:800;text-transform:capitalize;}
 
-/* PERIOD FILTER */
-.period-filter {
-display: flex; gap: 4px; margin-bottom: 16px;
-background: var(–surface); border: 1px solid var(–border);
-border-radius: 8px; padding: 4px;
+/* PERIOD */
+.period{
+display:flex;gap:4px;margin-bottom:15px;
+background:var(–s1);border:1px solid var(–border);
+border-radius:var(–r);padding:4px;
 }
-.period-btn {
-flex: 1; padding: 7px;
-background: none; border: none; border-radius: 6px;
-font-family: var(–mono); font-size: 10px;
-letter-spacing: 0.06em; text-transform: uppercase;
-color: var(–muted); cursor: pointer; transition: all 0.15s;
+.p-btn{
+flex:1;padding:8px;background:none;border:none;
+border-radius:9px;font-family:var(–font);
+font-size:12px;font-weight:800;letter-spacing:0.02em;
+color:var(–sub);cursor:pointer;transition:all 0.17s;
 }
-.period-btn.active { background: var(–surface2); color: var(–text); }
+.p-btn.active{background:var(–s3);color:var(–text);}
 
-/* EMPTY STATE */
-.empty {
-text-align: center; padding: 40px 20px;
-color: var(–muted); font-family: var(–mono); font-size: 11px;
-letter-spacing: 0.08em;
-}
-
-/* UNI PAGE */
-.uni-header {
-background: var(–surface);
-border: 1px solid var(–border);
-border-radius: 10px;
-padding: 16px;
-margin-bottom: 8px;
-}
-.uni-month-label {
-font-family: var(–mono); font-size: 10px;
-letter-spacing: 0.1em; text-transform: uppercase;
-color: var(–muted); margin-bottom: 8px;
-}
-.uni-budget-row {
-display: flex; align-items: baseline; gap: 8px;
-}
-.uni-budget-val {
-font-family: var(–mono); font-size: 28px; font-weight: 400;
-color: var(–accent); letter-spacing: -0.03em;
-}
-.uni-budget-label { font-size: 12px; color: var(–muted); }
-
-.progress-bar {
-height: 4px; background: var(–surface2);
-border-radius: 2px; margin: 12px 0 4px;
-overflow: hidden;
-}
-.progress-fill {
-height: 100%; border-radius: 2px;
-transition: width 0.4s ease;
-background: var(–accent);
-}
-.progress-fill.warning { background: #ffaa00; }
-.progress-fill.danger { background: var(–red); }
-.progress-labels {
-display: flex; justify-content: space-between;
-font-family: var(–mono); font-size: 10px; color: var(–muted);
-}
-
-.uni-stats-grid {
-display: grid; grid-template-columns: 1fr 1fr 1fr;
-gap: 8px; margin-bottom: 8px;
-}
-.stat-box {
-background: var(–surface); border: 1px solid var(–border);
-border-radius: 10px; padding: 12px;
-}
-.stat-box-label {
-font-family: var(–mono); font-size: 9px;
-letter-spacing: 0.08em; text-transform: uppercase;
-color: var(–muted); margin-bottom: 4px;
-}
-.stat-box-val {
-font-family: var(–mono); font-size: 14px; font-weight: 500;
-}
-
-/* MONTH SELECTOR */
-.month-selector {
-display: flex; align-items: center; gap: 10px;
-margin-bottom: 16px;
-}
-.month-btn {
-background: var(–surface); border: 1px solid var(–border);
-color: var(–text); border-radius: 6px;
-width: 28px; height: 28px; cursor: pointer;
-font-size: 14px; display: flex; align-items: center; justify-content: center;
-transition: all 0.15s;
-}
-.month-btn:hover { border-color: var(–accent); color: var(–accent); }
-.month-display {
-font-family: var(–mono); font-size: 12px;
-letter-spacing: 0.06em; color: var(–text); flex: 1; text-align: center;
-}
-
-/* TOAST */
-#toast {
-position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
-background: var(–surface2); border: 1px solid var(–border);
-border-radius: 8px; padding: 10px 18px;
-font-family: var(–mono); font-size: 11px; letter-spacing: 0.06em;
-color: var(–text); opacity: 0; transition: all 0.3s;
-pointer-events: none; z-index: 200;
-white-space: nowrap;
-}
-#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(–border); border-radius: 2px; }
+/* EMPTY */
+.empty{text-align:center;padding:36px 20px;color:var(–sub);font-size:13px;font-weight:600;}
+.empty-ico{font-size:26px;margin-bottom:8px;}
 
 /* MODAL */
-.modal-overlay {
-display: none; position: fixed; inset: 0; z-index: 150;
-background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-align-items: flex-end; justify-content: center;
+.overlay{
+display:none;position:fixed;inset:0;z-index:200;
+background:rgba(0,0,0,0.78);
+backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+align-items:flex-end;justify-content:center;
 }
-.modal-overlay.open { display: flex; }
-.modal {
-background: var(–surface); border: 1px solid var(–border);
-border-radius: 16px 16px 0 0;
-padding: 20px; width: 100%; max-width: 680px;
-animation: slideUp 0.25s ease;
+.overlay.open{display:flex;}
+.modal{
+background:var(–s1);border:1px solid var(–border2);
+border-radius:24px 24px 0 0;
+padding:16px 16px calc(20px + env(safe-area-inset-bottom));
+width:100%;max-width:580px;
+animation:su 0.25s cubic-bezier(0.34,1.4,0.64,1);
 }
-@keyframes slideUp {
-from { transform: translateY(40px); opacity: 0; }
-to { transform: translateY(0); opacity: 1; }
-}
-.modal-header {
-display: flex; align-items: center; justify-content: space-between;
-margin-bottom: 16px;
-}
-.modal-title {
-font-family: var(–mono); font-size: 11px;
-letter-spacing: 0.1em; text-transform: uppercase; color: var(–muted);
-}
-.modal-close {
-background: none; border: none; color: var(–muted);
-cursor: pointer; font-size: 18px; padding: 4px;
-line-height: 1;
-}
-.modal-close:hover { color: var(–text); }
+@keyframes su{from{transform:translateY(50px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.m-handle{width:36px;height:4px;background:var(–s3);border-radius:2px;margin:0 auto 16px;}
+.m-title{font-size:18px;font-weight:800;margin-bottom:3px;}
+.m-sub{font-size:13px;color:var(–sub);margin-bottom:16px;}
 
-@media (max-width: 480px) {
-.quick-grid { grid-template-columns: repeat(3,1fr); }
-.uni-stats-grid { grid-template-columns: 1fr 1fr; }
-.form-row { grid-template-columns: 1fr; }
+/* TOAST */
+#toast{
+position:fixed;bottom:calc(22px + env(safe-area-inset-bottom));
+left:50%;transform:translateX(-50%) translateY(14px);
+background:var(–s2);border:1px solid var(–border2);
+border-radius:100px;padding:10px 20px;
+font-size:13px;font-weight:700;color:var(–text);
+opacity:0;transition:all 0.23s ease;
+pointer-events:none;z-index:300;white-space:nowrap;
+box-shadow:0 8px 32px rgba(0,0,0,0.6);
 }
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-thumb{background:var(–s3);border-radius:2px;}
 </style>
 
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">₡ finanzas</div>
-  <div class="nav-tabs">
-    <button class="tab-btn active" onclick="showPage('general')">General</button>
-    <button class="tab-btn" onclick="showPage('uni')">Uni</button>
-    <button class="tab-btn" onclick="showPage('historial')">Historial</button>
+  <div class="nav-inner">
+    <div class="nav-logo">fin<em>.</em></div>
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="showPage('general')">General</button>
+      <button class="tab-btn" onclick="showPage('uni')">U</button>
+      <button class="tab-btn" onclick="showPage('historial')">Historial</button>
+    </div>
   </div>
 </nav>
 
 <main>
 
-  <!-- GENERAL PAGE -->
+<!-- ════ GENERAL ════ -->
 
-  <div class="page active" id="page-general">
-    <p class="section-title">Balance total</p>
-    <div class="card" style="margin-bottom:8px">
-      <div class="card-row">
-        <div>
-          <div class="card-label">Disponible total</div>
-          <div class="card-value" id="g-total">₡0</div>
+<div class="page active" id="page-general">
+
+  <div class="hero">
+    <div class="hero-lbl">Balance total</div>
+    <div class="hero-amt" id="g-total">₡0</div>
+    <div class="chips">
+      <span class="chip neu" id="g-week-chip">semana ₡0</span>
+      <span class="chip neu" id="g-month-chip">mes ₡0</span>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="mini">
+      <div class="mini-lbl"><div class="dot" style="background:var(--green)"></div>Efectivo</div>
+      <div class="mini-val c-green" id="g-efectivo">₡0</div>
+    </div>
+    <div class="mini">
+      <div class="mini-lbl"><div class="dot" style="background:var(--blue)"></div>Tarjeta</div>
+      <div class="mini-val c-blue" id="g-tarjeta">₡0</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="mini">
+      <div class="mini-lbl">↑ Ingresos mes</div>
+      <div class="mini-val c-green" id="g-ing-mes">₡0</div>
+    </div>
+    <div class="mini">
+      <div class="mini-lbl">↓ Gastos mes</div>
+      <div class="mini-val c-red" id="g-gas-mes">₡0</div>
+    </div>
+  </div>
+
+  <div class="lbl">Nuevo movimiento</div>
+  <div class="card">
+    <div class="fg">
+      <div class="tog">
+        <button class="tog-opt sel-ing" id="t-ing" onclick="setType('ingreso')">↑ Ingreso</button>
+        <button class="tog-opt" id="t-gas" onclick="setType('gasto')">↓ Gasto</button>
+      </div>
+    </div>
+    <div class="fg">
+      <label class="fl">Descripción</label>
+      <input class="fi" id="g-desc" type="text" placeholder="Soda, Uber, supermercado…">
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Monto (₡)</label>
+        <input class="fi" id="g-amount" type="number" inputmode="decimal" placeholder="0">
+      </div>
+      <div class="fg">
+        <label class="fl">Método</label>
+        <div class="tog">
+          <button class="tog-opt sel-ef" id="m-ef" onclick="setMethod('efectivo')">Efectivo</button>
+          <button class="tog-opt" id="m-ta" onclick="setMethod('tarjeta')">Tarjeta</button>
         </div>
-        <div style="text-align:right">
-          <div class="card-label" style="margin-bottom:4px">Semana</div>
-          <div id="g-week" style="font-family:var(--mono);font-size:13px;color:var(--muted)">₡0</div>
+      </div>
+    </div>
+    <div class="fg">
+      <button class="btn btn-g" onclick="addTx('general')">Registrar</button>
+    </div>
+  </div>
+
+  <div class="lbl">Últimos movimientos</div>
+  <div id="g-list"></div>
+
+</div>
+
+<!-- ════ UNI ════ -->
+
+<div class="page" id="page-uni">
+
+  <div class="mnav">
+    <button class="mnav-btn" onclick="uniNav(-1)">‹</button>
+    <div class="mnav-lbl" id="uni-month-lbl">—</div>
+    <button class="mnav-btn" onclick="uniNav(1)">›</button>
+  </div>
+
+  <div class="uni-hero">
+    <div class="uni-row">
+      <div class="uni-budget-block">
+        <div class="ul">Presupuesto</div>
+        <div class="uv" id="u-budget-lbl">₡0</div>
+      </div>
+      <div class="uni-remain-block">
+        <div class="ul">Disponible</div>
+        <div class="uni-remain-val" id="u-remain">₡0</div>
+      </div>
+    </div>
+    <div class="prog"><div class="prog-fill" id="u-prog" style="width:0%"></div></div>
+    <div class="prog-lbls">
+      <span id="u-spent-lbl">₡0 gastado</span>
+      <span id="u-pct-lbl">0%</span>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="mini">
+      <div class="mini-lbl">🚌 Buses</div>
+      <div class="mini-val c-green" id="u-stat-bus">₡0</div>
+    </div>
+    <div class="mini">
+      <div class="mini-lbl">🍽 Comida</div>
+      <div class="mini-val c-sub" id="u-stat-food">₡0</div>
+    </div>
+  </div>
+  <div class="g2">
+    <div class="mini">
+      <div class="mini-lbl">🚗 Transporte</div>
+      <div class="mini-val c-sub" id="u-stat-trans">₡0</div>
+    </div>
+    <div class="mini">
+      <div class="mini-lbl">📦 Otros</div>
+      <div class="mini-val c-sub" id="u-stat-other">₡0</div>
+    </div>
+  </div>
+
+  <div class="lbl">Buses rápidos</div>
+  <div class="buses" id="u-buses"></div>
+
+  <div class="lbl">Plata del mes</div>
+  <div class="card">
+    <div class="fg">
+      <label class="fl">Monto recibido (₡)</label>
+      <input class="fi" id="u-budget-input" type="number" inputmode="decimal" placeholder="0">
+    </div>
+    <div class="fg">
+      <button class="btn btn-g" onclick="setUniBudget()">Guardar presupuesto</button>
+    </div>
+  </div>
+
+  <div class="lbl">Registrar gasto U</div>
+  <div class="card">
+    <div class="fg">
+      <label class="fl">Descripción</label>
+      <input class="fi" id="u-desc" type="text" placeholder="Soda, Uber, material…">
+    </div>
+    <div class="frow">
+      <div class="fg">
+        <label class="fl">Monto (₡)</label>
+        <input class="fi" id="u-amount" type="number" inputmode="decimal" placeholder="0">
+      </div>
+      <div class="fg">
+        <label class="fl">Método</label>
+        <div class="tog">
+          <button class="tog-opt sel-ef" id="um-ef" onclick="setUniMethod('efectivo')">Efectivo</button>
+          <button class="tog-opt" id="um-ta" onclick="setUniMethod('tarjeta')">Tarjeta</button>
         </div>
       </div>
     </div>
-
-```
-<div class="balance-grid">
-  <div class="balance-mini efectivo">
-    <div class="balance-mini-label">Efectivo</div>
-    <div class="balance-mini-val" id="g-efectivo">₡0</div>
-  </div>
-  <div class="balance-mini tarjeta">
-    <div class="balance-mini-val" id="g-tarjeta" style="color:var(--blue)">₡0</div>
-    <div class="balance-mini-label" style="margin-top:4px;margin-bottom:0">Tarjeta</div>
-  </div>
-</div>
-
-<div class="balance-grid">
-  <div class="balance-mini">
-    <div class="balance-mini-label">↑ Ingresos (mes)</div>
-    <div class="balance-mini-val" id="g-ingresos-mes" style="color:var(--green)">₡0</div>
-  </div>
-  <div class="balance-mini">
-    <div class="balance-mini-label">↓ Gastos (mes)</div>
-    <div class="balance-mini-val" id="g-gastos-mes" style="color:var(--red)">₡0</div>
-  </div>
-</div>
-
-<p class="section-title">Buses rápidos</p>
-<div class="quick-grid" id="bus-grid"></div>
-
-<p class="section-title">Nuevo movimiento</p>
-<div class="card">
-  <div class="form-group">
-    <div class="type-toggle">
-      <button class="type-opt active ingreso" id="t-ingreso" onclick="setType('ingreso')">↑ Ingreso</button>
-      <button class="type-opt gasto" id="t-gasto" onclick="setType('gasto')">↓ Gasto</button>
+    <div class="fg">
+      <button class="btn btn-g" onclick="addTx('uni')">Registrar gasto</button>
     </div>
   </div>
-  <div class="form-group">
-    <label class="form-label">Descripción</label>
-    <input class="form-input" id="g-desc" type="text" placeholder="ej. Soda, Uber...">
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label">Monto (₡)</label>
-      <input class="form-input" id="g-amount" type="number" placeholder="0">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Método</label>
-      <div class="method-toggle">
-        <button class="method-opt active efectivo" id="m-efectivo" onclick="setMethod('efectivo')">Efectivo</button>
-        <button class="method-opt tarjeta" id="m-tarjeta" onclick="setMethod('tarjeta')">Tarjeta</button>
-      </div>
-    </div>
-  </div>
-  <button class="btn-primary" onclick="addTransaction('general')">Registrar</button>
+
+  <div class="lbl">Movimientos del mes</div>
+  <div id="u-list"></div>
+
 </div>
 
-<p class="section-title">Últimos movimientos</p>
-<div id="g-recent-list"></div>
-```
+<!-- ════ HISTORIAL ════ -->
 
+<div class="page" id="page-historial">
+
+  <div class="period">
+    <button class="p-btn active" onclick="setPeriod('semana',this)">Semana</button>
+    <button class="p-btn" onclick="setPeriod('mes',this)">Mes</button>
+    <button class="p-btn" onclick="setPeriod('todo',this)">Todo</button>
   </div>
 
-  <!-- UNI PAGE -->
-
-  <div class="page" id="page-uni">
-    <div class="month-selector">
-      <button class="month-btn" onclick="changeUniMonth(-1)">‹</button>
-      <div class="month-display" id="uni-month-display">—</div>
-      <button class="month-btn" onclick="changeUniMonth(1)">›</button>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="mini">
+      <div class="mini-lbl">↑ Ingresos</div>
+      <div class="mini-val c-green" id="h-ing">₡0</div>
     </div>
-
-```
-<div class="uni-header">
-  <div class="uni-month-label">Presupuesto mensual</div>
-  <div class="uni-budget-row">
-    <div class="uni-budget-val" id="uni-budget-val">₡0</div>
-    <div class="uni-budget-label">recibidos</div>
-  </div>
-  <div class="progress-bar">
-    <div class="progress-fill" id="uni-progress" style="width:0%"></div>
-  </div>
-  <div class="progress-labels">
-    <span id="uni-spent-label">₡0 gastado</span>
-    <span id="uni-remain-label">₡0 restante</span>
-  </div>
-</div>
-
-<div class="uni-stats-grid">
-  <div class="stat-box">
-    <div class="stat-box-label">Buses</div>
-    <div class="stat-box-val" id="uni-stat-buses" style="color:var(--accent)">₡0</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-box-label">Comida</div>
-    <div class="stat-box-val" id="uni-stat-food" style="color:var(--text)">₡0</div>
-  </div>
-  <div class="stat-box">
-    <div class="stat-box-label">Otros</div>
-    <div class="stat-box-val" id="uni-stat-other" style="color:var(--text)">₡0</div>
-  </div>
-</div>
-
-<p class="section-title">Buses rápidos</p>
-<div class="quick-grid" id="uni-bus-grid"></div>
-
-<p class="section-title">Ingresar plata del mes</p>
-<div class="card">
-  <div class="form-group">
-    <label class="form-label">Monto recibido (₡)</label>
-    <input class="form-input" id="uni-budget-input" type="number" placeholder="0">
-  </div>
-  <button class="btn-primary" onclick="setUniBudget()">Guardar presupuesto</button>
-</div>
-
-<p class="section-title">Registrar gasto uni</p>
-<div class="card">
-  <div class="form-group">
-    <label class="form-label">Descripción</label>
-    <input class="form-input" id="uni-desc" type="text" placeholder="Soda, Uber, material...">
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label class="form-label">Monto (₡)</label>
-      <input class="form-input" id="uni-amount" type="number" placeholder="0">
-    </div>
-    <div class="form-group">
-      <label class="form-label">Método</label>
-      <div class="method-toggle">
-        <button class="method-opt active efectivo" id="um-efectivo" onclick="setUniMethod('efectivo')">Efectivo</button>
-        <button class="method-opt tarjeta" id="um-tarjeta" onclick="setUniMethod('tarjeta')">Tarjeta</button>
-      </div>
+    <div class="mini">
+      <div class="mini-lbl">↓ Gastos</div>
+      <div class="mini-val c-red" id="h-gas">₡0</div>
     </div>
   </div>
-  <button class="btn-primary" onclick="addTransaction('uni')">Registrar gasto</button>
+
+  <div id="h-list"></div>
+
 </div>
-
-<p class="section-title">Movimientos del mes</p>
-<div id="uni-tx-list"></div>
-```
-
-  </div>
-
-  <!-- HISTORIAL PAGE -->
-
-  <div class="page" id="page-historial">
-    <p class="section-title">Filtrar período</p>
-    <div class="period-filter">
-      <button class="period-btn active" onclick="setPeriod('semana')">Semana</button>
-      <button class="period-btn" onclick="setPeriod('mes')">Mes</button>
-      <button class="period-btn" onclick="setPeriod('todo')">Todo</button>
-    </div>
-
-```
-<div class="balance-grid" style="margin-bottom:16px">
-  <div class="balance-mini">
-    <div class="balance-mini-label">↑ Ingresos</div>
-    <div class="balance-mini-val" id="h-ingresos" style="color:var(--green)">₡0</div>
-  </div>
-  <div class="balance-mini">
-    <div class="balance-mini-label">↓ Gastos</div>
-    <div class="balance-mini-val" id="h-gastos" style="color:var(--red)">₡0</div>
-  </div>
-</div>
-
-<div id="h-list"></div>
-```
-
-  </div>
 
 </main>
 
-<div id="toast"></div>
-
 <!-- BUS MODAL -->
 
-<div class="modal-overlay" id="bus-modal">
+<div class="overlay" id="bus-overlay">
   <div class="modal">
-    <div class="modal-header">
-      <span class="modal-title" id="bus-modal-title">Confirmar bus</span>
-      <button class="modal-close" onclick="closeBusModal()">×</button>
-    </div>
-    <p style="color:var(--muted);font-size:13px;margin-bottom:16px" id="bus-modal-desc">¿Registrar este gasto?</p>
-    <div class="form-group">
-      <label class="form-label">Método de pago</label>
-      <div class="method-toggle">
-        <button class="method-opt active efectivo" id="bm-efectivo" onclick="setBusMethod('efectivo')">Efectivo</button>
-        <button class="method-opt tarjeta" id="bm-tarjeta" onclick="setBusMethod('tarjeta')">Tarjeta</button>
+    <div class="m-handle"></div>
+    <div class="m-title" id="bm-title">Bus</div>
+    <div class="m-sub" id="bm-sub">Confirmar gasto</div>
+    <div class="fg">
+      <label class="fl">Método de pago</label>
+      <div class="tog">
+        <button class="tog-opt sel-ef" id="bm-ef" onclick="setBusMethod('efectivo')">Efectivo</button>
+        <button class="tog-opt" id="bm-ta" onclick="setBusMethod('tarjeta')">Tarjeta</button>
       </div>
     </div>
-    <button class="btn-primary" onclick="confirmBus()">Registrar</button>
+    <div class="fg" style="margin-top:12px">
+      <button class="btn btn-g" onclick="confirmBus()">Confirmar</button>
+    </div>
   </div>
 </div>
 
+<div id="toast"></div>
+
 <script>
-// ── STATE ──────────────────────────────────────────────
-const BUSES = [
-  { id:'bus1', name:'Bus 1', amount: 265 },
-  { id:'bus2', name:'Bus 2', amount: 400 },
-  { id:'bus3', name:'Bus 3', amount: 720 },
-];
+const BUSES=[{id:'b1',name:'Bus 1',amount:265},{id:'b2',name:'Bus 2',amount:400},{id:'b3',name:'Bus 3',amount:720}];
+let gType='ingreso',gMethod='efectivo',uMethod='efectivo',busMethod='efectivo';
+let hPeriod='semana',uOffset=0,pendingBus=null;
 
-let currentType = 'ingreso';
-let currentMethod = 'efectivo';
-let uniMethod = 'efectivo';
-let busMethod = 'efectivo';
-let historialPeriod = 'semana';
-let pendingBus = null;
-let uniMonthOffset = 0; // 0 = current month
+const LS={
+  get:(k,d)=>{try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}},
+  set:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+};
+const getTxs=()=>LS.get('txs_v3',[]);
+const saveTxs=v=>LS.set('txs_v3',v);
+const getBudgets=()=>LS.get('uni_budgets_v2',{});
+const saveBudgets=v=>LS.set('uni_budgets_v2',v);
 
-function getUniMonthKey(offset = uniMonthOffset) {
-  const d = new Date();
-  d.setMonth(d.getMonth() + offset);
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+const fmt=n=>'₡'+Math.abs(Math.round(n)).toLocaleString('es-CR');
+const fmtS=n=>(n>=0?'+':'-')+fmt(n);
+const iso=()=>new Date().toISOString();
+
+function weekStart(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-d.getDay());return d;}
+function monthStart(){const d=new Date();d.setDate(1);d.setHours(0,0,0,0);return d;}
+function filterP(txs,p){
+  if(p==='todo')return txs;
+  const c=p==='semana'?weekStart():monthStart();
+  return txs.filter(t=>new Date(t.date)>=c);
+}
+function uKey(off=uOffset){
+  const d=new Date();d.setMonth(d.getMonth()+off);
+  return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+}
+function uLabel(off=uOffset){
+  const d=new Date();d.setMonth(d.getMonth()+off);
+  return d.toLocaleDateString('es-CR',{month:'long',year:'numeric'});
 }
 
-function getUniMonthLabel(offset = uniMonthOffset) {
-  const d = new Date();
-  d.setMonth(d.getMonth() + offset);
-  return d.toLocaleDateString('es-CR', { month: 'long', year: 'numeric' });
+function toast(msg){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2400);
 }
 
-// ── STORAGE ─────────────────────────────────────────────
-function load(key, def) {
-  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; }
-  catch { return def; }
-}
-function save(key, val) {
-  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
-}
-
-function getTxs() { return load('txs', []); }
-function saveTxs(txs) { save('txs', txs); }
-function getUniBudgets() { return load('uni_budgets', {}); }
-function saveUniBudgets(b) { save('uni_budgets', b); }
-
-// ── HELPERS ─────────────────────────────────────────────
-function fmt(n) {
-  return '₡' + Math.abs(n).toLocaleString('es-CR');
-}
-function fmtSigned(n) {
-  return (n >= 0 ? '+₡' : '-₡') + Math.abs(n).toLocaleString('es-CR');
-}
-function nowISO() { return new Date().toISOString(); }
-
-function startOfWeek() {
-  const d = new Date();
-  d.setHours(0,0,0,0);
-  d.setDate(d.getDate() - d.getDay());
-  return d;
-}
-function startOfMonth() {
-  const d = new Date();
-  d.setDate(1); d.setHours(0,0,0,0);
-  return d;
-}
-
-function filterTxs(txs, period) {
-  if (period === 'todo') return txs;
-  const cutoff = period === 'semana' ? startOfWeek() : startOfMonth();
-  return txs.filter(t => new Date(t.date) >= cutoff);
-}
-
-function getMonthTxs(txs, monthKey) {
-  return txs.filter(t => t.date.startsWith(monthKey));
-}
-
-// ── TOAST ────────────────────────────────────────────────
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  setTimeout(() => el.classList.remove('show'), 2200);
-}
-
-// ── PAGES ────────────────────────────────────────────────
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    if (b.textContent.toLowerCase().trim() === id ||
-        (id==='uni' && b.textContent.trim()==='Uni') ||
-        (id==='historial' && b.textContent.trim()==='Historial') ||
-        (id==='general' && b.textContent.trim()==='General')) {
-      b.classList.add('active');
-    }
+  document.querySelectorAll('.tab-btn').forEach(b=>{
+    const map={general:'General',uni:'U',historial:'Historial'};
+    if(b.textContent.trim()===map[id])b.classList.add('active');
   });
-  if (id==='historial') renderHistorial();
-  if (id==='uni') renderUni();
-  if (id==='general') renderGeneral();
+  if(id==='general')renderGeneral();
+  if(id==='uni')renderUni();
+  if(id==='historial')renderHistorial();
 }
 
-// ── TYPE / METHOD ────────────────────────────────────────
-function setType(t) {
-  currentType = t;
-  document.getElementById('t-ingreso').className = 'type-opt' + (t==='ingreso'?' active ingreso':'');
-  document.getElementById('t-gasto').className = 'type-opt' + (t==='gasto'?' active gasto':'');
+function setType(t){
+  gType=t;
+  document.getElementById('t-ing').className='tog-opt'+(t==='ingreso'?' sel-ing':'');
+  document.getElementById('t-gas').className='tog-opt'+(t==='gasto'?' sel-gas':'');
 }
-function setMethod(m) {
-  currentMethod = m;
-  document.getElementById('m-efectivo').className = 'method-opt' + (m==='efectivo'?' active efectivo':'');
-  document.getElementById('m-tarjeta').className = 'method-opt' + (m==='tarjeta'?' active tarjeta':'');
+function setMethod(m){
+  gMethod=m;
+  document.getElementById('m-ef').className='tog-opt'+(m==='efectivo'?' sel-ef':'');
+  document.getElementById('m-ta').className='tog-opt'+(m==='tarjeta'?' sel-ta':'');
 }
-function setUniMethod(m) {
-  uniMethod = m;
-  document.getElementById('um-efectivo').className = 'method-opt' + (m==='efectivo'?' active efectivo':'');
-  document.getElementById('um-tarjeta').className = 'method-opt' + (m==='tarjeta'?' active tarjeta':'');
+function setUniMethod(m){
+  uMethod=m;
+  document.getElementById('um-ef').className='tog-opt'+(m==='efectivo'?' sel-ef':'');
+  document.getElementById('um-ta').className='tog-opt'+(m==='tarjeta'?' sel-ta':'');
 }
-function setBusMethod(m) {
-  busMethod = m;
-  document.getElementById('bm-efectivo').className = 'method-opt' + (m==='efectivo'?' active efectivo':'');
-  document.getElementById('bm-tarjeta').className = 'method-opt' + (m==='tarjeta'?' active tarjeta':'');
+function setBusMethod(m){
+  busMethod=m;
+  document.getElementById('bm-ef').className='tog-opt'+(m==='efectivo'?' sel-ef':'');
+  document.getElementById('bm-ta').className='tog-opt'+(m==='tarjeta'?' sel-ta':'');
 }
 
-// ── TRANSACTIONS ─────────────────────────────────────────
-function addTransaction(source) {
-  const desc = source==='general'
-    ? document.getElementById('g-desc').value.trim()
-    : document.getElementById('uni-desc').value.trim();
-  const amount = parseFloat(source==='general'
-    ? document.getElementById('g-amount').value
-    : document.getElementById('uni-amount').value);
-  const method = source==='general' ? currentMethod : uniMethod;
-  const type = source==='uni' ? 'gasto' : currentType;
-
-  if (!desc) { toast('Agrega una descripción'); return; }
-  if (!amount || amount <= 0) { toast('Monto inválido'); return; }
-
-  const tx = {
-    id: Date.now(),
-    desc, amount, method, type, source,
-    date: nowISO(),
-  };
-
-  const txs = getTxs();
-  txs.unshift(tx);
-  saveTxs(txs);
-
-  if (source==='general') {
-    document.getElementById('g-desc').value = '';
-    document.getElementById('g-amount').value = '';
+function addTx(src){
+  const desc=document.getElementById(src==='general'?'g-desc':'u-desc').value.trim();
+  const amount=parseFloat(document.getElementById(src==='general'?'g-amount':'u-amount').value);
+  const method=src==='general'?gMethod:uMethod;
+  const type=src==='uni'?'gasto':gType;
+  if(!desc){toast('Agrega una descripción');return;}
+  if(!amount||amount<=0){toast('Monto inválido');return;}
+  const txs=getTxs();
+  const base={desc,amount,method,type,date:iso()};
+  if(src==='general'){
+    txs.unshift({...base,id:Date.now(),source:'general'});
   } else {
-    document.getElementById('uni-desc').value = '';
-    document.getElementById('uni-amount').value = '';
+    const i1=Date.now(),i2=i1+1;
+    txs.unshift({...base,id:i1,source:'uni'});
+    txs.unshift({...base,id:i2,source:'general',uniMirror:true});
   }
-
+  saveTxs(txs);
+  document.getElementById(src==='general'?'g-desc':'u-desc').value='';
+  document.getElementById(src==='general'?'g-amount':'u-amount').value='';
   toast(`${type==='ingreso'?'↑':'↓'} ${fmt(amount)} — ${desc}`);
   renderGeneral();
-  if (source==='uni') renderUni();
+  if(src==='uni')renderUni();
 }
 
-function deleteTransaction(id) {
-  let txs = getTxs().filter(t => t.id !== id);
-  saveTxs(txs);
-  renderGeneral();
-  renderUni();
-  renderHistorial();
-  toast('Movimiento eliminado');
-}
-
-// ── BUS QUICK ────────────────────────────────────────────
-function renderBuses(containerId, source) {
-  const el = document.getElementById(containerId);
-  el.innerHTML = BUSES.map(b => `
-    <button class="quick-btn" onclick="openBusModal('${b.id}','${b.name}',${b.amount},'${source}')">
-      <span class="quick-icon">🚌</span>
-      <span class="quick-name">${b.name}</span>
-      <span class="quick-price">${fmt(b.amount)}</span>
-    </button>
-  `).join('');
-}
-
-function openBusModal(id, name, amount, source) {
-  pendingBus = { id, name, amount, source };
-  busMethod = 'efectivo';
-  setBusMethod('efectivo');
-  document.getElementById('bus-modal-title').textContent = name;
-  document.getElementById('bus-modal-desc').textContent = `Registrar gasto de ${fmt(amount)}`;
-  document.getElementById('bus-modal').classList.add('open');
-}
-function closeBusModal() {
-  document.getElementById('bus-modal').classList.remove('open');
-  pendingBus = null;
-}
-function confirmBus() {
-  if (!pendingBus) return;
-  const { name, amount, source } = pendingBus;
-  const tx = {
-    id: Date.now(),
-    desc: name,
-    amount,
-    method: busMethod,
-    type: 'gasto',
-    source: source === 'uni' ? 'uni' : 'general',
-    date: nowISO(),
-    isBus: true,
-  };
-  // also add to general if uni source
-  const txsToAdd = [tx];
-  if (source === 'uni') {
-    txsToAdd.push({ ...tx, id: Date.now()+1, source: 'general' });
-  }
-  const txs = getTxs();
-  txsToAdd.forEach(t => txs.unshift(t));
-  saveTxs(txs);
-  closeBusModal();
-  toast(`🚌 ${name} — ${fmt(amount)}`);
-  renderGeneral();
-  renderUni();
-}
-
-// ── RENDER GENERAL ───────────────────────────────────────
-function renderGeneral() {
-  const txs = getTxs();
-  const all = txs.filter(t => t.source === 'general');
-  const monthTxs = filterTxs(all, 'mes');
-  const weekTxs = filterTxs(all, 'semana');
-
-  // totals
-  let efectivo = 0, tarjeta = 0;
-  all.forEach(t => {
-    const v = t.type==='ingreso' ? t.amount : -t.amount;
-    if (t.method==='efectivo') efectivo += v;
-    else tarjeta += v;
+function setUniBudget(){
+  const val=parseFloat(document.getElementById('u-budget-input').value);
+  if(!val||val<=0){toast('Monto inválido');return;}
+  const key=uKey();
+  const b=getBudgets();b[key]=val;saveBudgets(b);
+  // Remove old budget income entry for this month, add new
+  let txs=getTxs().filter(t=>!(t.uniIncome&&t.uniMonthKey===key));
+  txs.unshift({
+    id:Date.now(),source:'general',type:'ingreso',method:'efectivo',
+    desc:`Presupuesto U (${uLabel()})`,
+    amount:val,date:iso(),uniIncome:true,uniMonthKey:key
   });
-  const total = efectivo + tarjeta;
-
-  const ingMes = monthTxs.filter(t=>t.type==='ingreso').reduce((s,t)=>s+t.amount,0);
-  const gasMes = monthTxs.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
-  const netWeek = weekTxs.reduce((s,t)=>s+(t.type==='ingreso'?t.amount:-t.amount),0);
-
-  document.getElementById('g-total').textContent = fmt(total);
-  document.getElementById('g-total').className = 'card-value ' + (total>=0?'positive':'negative');
-  document.getElementById('g-efectivo').textContent = fmt(efectivo);
-  document.getElementById('g-tarjeta').textContent = fmt(tarjeta);
-  document.getElementById('g-ingresos-mes').textContent = fmt(ingMes);
-  document.getElementById('g-gastos-mes').textContent = fmt(gasMes);
-  document.getElementById('g-week').textContent = fmtSigned(netWeek);
-  document.getElementById('g-week').style.color = netWeek >= 0 ? 'var(--green)' : 'var(--red)';
-
-  // recent
-  const recent = all.slice(0, 8);
-  const listEl = document.getElementById('g-recent-list');
-  listEl.innerHTML = recent.length ? recent.map(t => txCard(t)).join('') :
-    '<div class="empty">Sin movimientos aún</div>';
-
-  renderBuses('bus-grid', 'general');
-}
-
-// ── RENDER UNI ───────────────────────────────────────────
-function renderUni() {
-  const monthKey = getUniMonthKey();
-  document.getElementById('uni-month-display').textContent = getUniMonthLabel();
-
-  const budgets = getUniBudgets();
-  const budget = budgets[monthKey] || 0;
-
-  const txs = getTxs();
-  const uniTxs = getMonthTxs(txs.filter(t => t.source==='uni'), monthKey);
-
-  const spent = uniTxs.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
-  const remain = budget - spent;
-  const pct = budget > 0 ? Math.min((spent/budget)*100, 100) : 0;
-
-  document.getElementById('uni-budget-val').textContent = fmt(budget);
-  document.getElementById('uni-progress').style.width = pct + '%';
-  document.getElementById('uni-progress').className = 'progress-fill' +
-    (pct > 90 ? ' danger' : pct > 70 ? ' warning' : '');
-  document.getElementById('uni-spent-label').textContent = fmt(spent) + ' gastado';
-  document.getElementById('uni-remain-label').textContent = fmt(remain < 0 ? 0 : remain) + ' restante';
-
-  // stats
-  const busesTxs = uniTxs.filter(t=>t.isBus);
-  const foodTxs = uniTxs.filter(t=>!t.isBus && /soda|comida|almuerzo|café|cafe|snack/i.test(t.desc));
-  const otherTxs = uniTxs.filter(t=>!t.isBus && !/soda|comida|almuerzo|café|cafe|snack/i.test(t.desc));
-  document.getElementById('uni-stat-buses').textContent = fmt(busesTxs.reduce((s,t)=>s+t.amount,0));
-  document.getElementById('uni-stat-food').textContent = fmt(foodTxs.reduce((s,t)=>s+t.amount,0));
-  document.getElementById('uni-stat-other').textContent = fmt(otherTxs.reduce((s,t)=>s+t.amount,0));
-
-  const listEl = document.getElementById('uni-tx-list');
-  listEl.innerHTML = uniTxs.length ? uniTxs.map(t => txCard(t)).join('') :
-    '<div class="empty">Sin gastos este mes</div>';
-
-  renderBuses('uni-bus-grid', 'uni');
-}
-
-function changeUniMonth(dir) {
-  uniMonthOffset += dir;
-  renderUni();
-}
-
-function setUniBudget() {
-  const val = parseFloat(document.getElementById('uni-budget-input').value);
-  if (!val || val <= 0) { toast('Monto inválido'); return; }
-  const key = getUniMonthKey();
-  const budgets = getUniBudgets();
-  budgets[key] = val;
-  saveUniBudgets(budgets);
-  document.getElementById('uni-budget-input').value = '';
+  saveTxs(txs);
+  document.getElementById('u-budget-input').value='';
   toast(`Presupuesto ${fmt(val)} guardado`);
-  renderUni();
+  renderGeneral();renderUni();
 }
 
-// ── RENDER HISTORIAL ─────────────────────────────────────
-function setPeriod(p) {
-  historialPeriod = p;
-  document.querySelectorAll('.period-btn').forEach(b => {
-    b.classList.toggle('active', b.textContent.toLowerCase() === p ||
-      (p==='semana' && b.textContent==='Semana') ||
-      (p==='mes' && b.textContent==='Mes') ||
-      (p==='todo' && b.textContent==='Todo'));
-  });
-  renderHistorial();
+function deleteTx(id){
+  saveTxs(getTxs().filter(t=>t.id!==id));
+  renderGeneral();renderUni();renderHistorial();
+  toast('Eliminado');
 }
 
-function renderHistorial() {
-  const txs = getTxs();
-  // dedup buses (general + uni same timestamp close)
-  const filtered = filterTxs(txs, historialPeriod);
-  // unique by id
-  const seen = new Set();
-  const unique = filtered.filter(t => {
-    if (seen.has(t.id)) return false; seen.add(t.id); return true;
-  });
-
-  const ingresos = unique.filter(t=>t.type==='ingreso').reduce((s,t)=>s+t.amount,0);
-  const gastos = unique.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
-
-  document.getElementById('h-ingresos').textContent = fmt(ingresos);
-  document.getElementById('h-gastos').textContent = fmt(gastos);
-
-  const listEl = document.getElementById('h-list');
-  listEl.innerHTML = unique.length ? unique.map(t => txCard(t, true)).join('') :
-    '<div class="empty">Sin movimientos en este período</div>';
+function renderBuses(cId,src){
+  document.getElementById(cId).innerHTML=BUSES.map(b=>`
+    <button class="bus-btn" onclick="openBusModal('${b.name}',${b.amount},'${src}')">
+      <span class="bus-icon">🚌</span>
+      <span class="bus-name">${b.name}</span>
+      <span class="bus-price">${fmt(b.amount)}</span>
+    </button>`).join('');
 }
 
-// ── TX CARD ───────────────────────────────────────────────
-function txCard(t, showDate=false) {
-  const d = new Date(t.date);
-  const dateStr = d.toLocaleDateString('es-CR', { day:'2-digit', month:'short' });
-  const timeStr = d.toLocaleTimeString('es-CR', { hour:'2-digit', minute:'2-digit' });
-  const srcBadge = t.source==='uni' ? '<span style="background:var(--accent-dim);color:var(--accent);padding:1px 5px;border-radius:4px;font-size:9px;font-family:var(--mono)">UNI</span>' : '';
-  return `
-    <div class="tx-item">
-      <div class="tx-dot ${t.type}"></div>
-      <div class="tx-info">
-        <div class="tx-desc">${t.desc} ${srcBadge}</div>
-        <div class="tx-meta">
-          <span>${dateStr}${showDate?' · '+timeStr:' · '+timeStr}</span>
-          <span class="tx-method-badge ${t.method}">${t.method}</span>
-        </div>
+function openBusModal(name,amount,src){
+  pendingBus={name,amount,src};
+  busMethod='efectivo';setBusMethod('efectivo');
+  document.getElementById('bm-title').textContent=name;
+  document.getElementById('bm-sub').textContent=`Registrar gasto de ${fmt(amount)}`;
+  document.getElementById('bus-overlay').classList.add('open');
+}
+document.getElementById('bus-overlay').addEventListener('click',e=>{
+  if(e.target===document.getElementById('bus-overlay'))closeBusModal();
+});
+function closeBusModal(){document.getElementById('bus-overlay').classList.remove('open');pendingBus=null;}
+function confirmBus(){
+  if(!pendingBus)return;
+  const{name,amount,src}=pendingBus;
+  const txs=getTxs();
+  const base={desc:name,amount,method:busMethod,type:'gasto',date:iso(),isBus:true};
+  const i1=Date.now(),i2=i1+1;
+  if(src==='uni'){
+    txs.unshift({...base,id:i1,source:'uni'});
+    txs.unshift({...base,id:i2,source:'general',uniMirror:true});
+  } else {
+    txs.unshift({...base,id:i1,source:'general'});
+  }
+  saveTxs(txs);closeBusModal();
+  toast(`🚌 ${name} — ${fmt(amount)}`);
+  renderGeneral();if(src==='uni')renderUni();
+}
+
+function renderGeneral(){
+  const txs=getTxs();
+  const gen=txs.filter(t=>t.source==='general');
+  let ef=0,ta=0;
+  gen.forEach(t=>{const v=t.type==='ingreso'?t.amount:-t.amount;if(t.method==='efectivo')ef+=v;else ta+=v;});
+  const total=ef+ta;
+  const mes=filterP(gen,'mes');
+  const sem=filterP(gen,'semana');
+  const ingMes=mes.filter(t=>t.type==='ingreso').reduce((s,t)=>s+t.amount,0);
+  const gasMes=mes.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
+  const netSem=sem.reduce((s,t)=>s+(t.type==='ingreso'?t.amount:-t.amount),0);
+  const netMes=ingMes-gasMes;
+
+  const el=document.getElementById('g-total');
+  el.textContent=fmt(total);el.className='hero-amt'+(total<0?' neg':'');
+  const wc=document.getElementById('g-week-chip');
+  wc.textContent='semana '+fmtS(netSem);wc.className='chip '+(netSem>=0?'up':'dn');
+  const mc=document.getElementById('g-month-chip');
+  mc.textContent='mes '+fmtS(netMes);mc.className='chip '+(netMes>=0?'up':'dn');
+
+  document.getElementById('g-efectivo').textContent=fmt(ef);
+  document.getElementById('g-tarjeta').textContent=fmt(ta);
+  document.getElementById('g-ing-mes').textContent=fmt(ingMes);
+  document.getElementById('g-gas-mes').textContent=fmt(gasMes);
+
+  const disp=gen.slice(0,12);
+  document.getElementById('g-list').innerHTML=disp.length?disp.map(t=>txCard(t)).join(''):emptyEl('Sin movimientos aún');
+}
+
+function renderUni(){
+  const key=uKey();
+  document.getElementById('uni-month-lbl').textContent=uLabel();
+  const budgets=getBudgets();
+  const budget=budgets[key]||0;
+  const txs=getTxs();
+  const uTxs=txs.filter(t=>t.source==='uni'&&t.date.startsWith(key));
+  const spent=uTxs.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
+  const remain=budget-spent;
+  const pct=budget>0?Math.min((spent/budget)*100,100):0;
+  const danger=pct>90,warn=pct>70;
+
+  document.getElementById('u-budget-lbl').textContent=fmt(budget);
+  const rEl=document.getElementById('u-remain');
+  rEl.textContent=fmt(remain<0?0:remain);
+  rEl.className='uni-remain-val'+(danger?' danger':warn?' warn':'');
+  const prog=document.getElementById('u-prog');
+  prog.style.width=pct+'%';
+  prog.className='prog-fill'+(danger?' danger':warn?' warn':'');
+  document.getElementById('u-spent-lbl').textContent=fmt(spent)+' gastado';
+  document.getElementById('u-pct-lbl').textContent=Math.round(pct)+'%';
+
+  const buses=uTxs.filter(t=>t.isBus).reduce((s,t)=>s+t.amount,0);
+  const food=uTxs.filter(t=>!t.isBus&&/soda|comida|almuerzo|café|cafe|snack|merienda/i.test(t.desc)).reduce((s,t)=>s+t.amount,0);
+  const trans=uTxs.filter(t=>!t.isBus&&/uber|taxi|lyft|transporte/i.test(t.desc)).reduce((s,t)=>s+t.amount,0);
+  const other=uTxs.filter(t=>!t.isBus&&!/soda|comida|almuerzo|café|cafe|snack|merienda|uber|taxi|lyft|transporte/i.test(t.desc)).reduce((s,t)=>s+t.amount,0);
+  document.getElementById('u-stat-bus').textContent=fmt(buses);
+  document.getElementById('u-stat-food').textContent=fmt(food);
+  document.getElementById('u-stat-trans').textContent=fmt(trans);
+  document.getElementById('u-stat-other').textContent=fmt(other);
+
+  document.getElementById('u-list').innerHTML=uTxs.length?uTxs.map(t=>txCard(t,true)).join(''):emptyEl('Sin gastos este mes');
+  renderBuses('u-buses','uni');
+}
+function uniNav(d){uOffset+=d;renderUni();}
+
+function setPeriod(p,btn){
+  hPeriod=p;
+  document.querySelectorAll('.p-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');renderHistorial();
+}
+function renderHistorial(){
+  const txs=getTxs();
+  const unique=txs.filter((t,i,arr)=>!t.uniMirror&&arr.findIndex(x=>x.id===t.id)===i);
+  const filtered=filterP(unique,hPeriod);
+  const ing=filtered.filter(t=>t.type==='ingreso').reduce((s,t)=>s+t.amount,0);
+  const gas=filtered.filter(t=>t.type==='gasto').reduce((s,t)=>s+t.amount,0);
+  document.getElementById('h-ing').textContent=fmt(ing);
+  document.getElementById('h-gas').textContent=fmt(gas);
+  document.getElementById('h-list').innerHTML=filtered.length?filtered.map(t=>txCard(t,true)).join(''):emptyEl('Sin movimientos en este período');
+}
+
+function txCard(t,full=false){
+  const d=new Date(t.date);
+  const ds=d.toLocaleDateString('es-CR',{day:'2-digit',month:'short'});
+  const ts=d.toLocaleTimeString('es-CR',{hour:'2-digit',minute:'2-digit'});
+  const ico=t.isBus?'🚌':t.type==='ingreso'?'↑':'↓';
+  const uBadge=t.source==='uni'?'<span class="badge b-u">U</span>':'';
+  return`<div class="tx">
+    <div class="tx-ico ${t.type}">${ico}</div>
+    <div class="tx-body">
+      <div class="tx-desc">${t.desc}</div>
+      <div class="tx-meta">
+        <span>${ds}${full?' · '+ts:''}</span>
+        <span class="badge b-${t.method==='efectivo'?'ef':'ta'}">${t.method}</span>
+        ${uBadge}
       </div>
-      <div class="tx-amount ${t.type}">${t.type==='ingreso'?'+':'-'}${fmt(t.amount)}</div>
-      <button class="tx-del" onclick="deleteTransaction(${t.id})" title="Eliminar">×</button>
     </div>
-  `;
+    <div class="tx-amt ${t.type}">${t.type==='ingreso'?'+':'-'}${fmt(t.amount)}</div>
+    <button class="tx-del" onclick="deleteTx(${t.id})">×</button>
+  </div>`;
 }
+function emptyEl(msg){return`<div class="empty"><div class="empty-ico">◌</div>${msg}</div>`;}
 
-// ── INIT ─────────────────────────────────────────────────
 renderGeneral();
-renderBuses('bus-grid', 'general');
 </script>
 
 </body>
